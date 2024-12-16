@@ -33,4 +33,15 @@ class ReportController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    public function update(Request $request){
+        $request->validate([
+            'status_id'=> ['required'],
+            'id'=>  ['required'],
+        ]);
+        Report::where('id', $request->id)->update([
+            'status_id'=> $request->status_id,
+        ]);
+        return redirect()->back();
+    }
 }
